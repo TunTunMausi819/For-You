@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine's Day</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: powderblue;
+    }
+    .bounce {
+      animation: bounce 1.5s infinite;
+    }
+    @keyframes bounce {
+      50% { transform: translateY(-10px); }
+    }
+    .button-container {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    #no {
+      position: relative;
+    }
+    #image {
+      width: 200px; /* Medium size */
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    #extra-text {
+      display: none; /* Hidden initially */
+      font-size: 1.5rem;
+      color: #d63384;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center justify-center h-screen">
+  <div class="text-center">
+    <img id="image" src="ilu.png" class="w-48 h-48 mx-auto"/>
+    <h2 id="question" class="text-3xl font-bold text-pink-700 my-4">Will you be my Valentine?</h2>
+    <div id="buttons" class="button-container">
+      <button id="yes" class="bounce bg-green-500 text-white px-6 py-3 rounded-lg text-lg">Yes</button>
+      <button id="no" class="bg-red-500 text-white px-6 py-3 rounded-lg text-lg">No</button>
+    </div>
+    <!-- New extra text -->
+    <p id="extra-text">My valentine🤌🏻, Let's meet soon:))</p>
+  </div>
+  <script type="module">
+    import confetti from 'https://cdn.skypack.dev/canvas-confetti';
+
+    const images = ["./images/image1.gif", "./images/image2.gif", "./images/image3.gif", "./images/image4.gif", "./images/image5.gif", "./images/image6.gif", "./images/image7.gif"];
+    const messages = ["Really, NO??", "Are you sure?", "Enaku Nee Venum🫵🏻", "En Chella Kutty la Plss :))", "Enoda Heart Ah Odaikada💔", "Accept Panu🔪","Kinder Joy Vaangi Tharen🤌🏻","Thimmiru Kaathadi","Thango pls ma 🤌🏻❤️"];
+    
+    let noCount = 0;
+    const noButton = document.getElementById("no");
+    const yesButton = document.getElementById("yes");
+    const extraText = document.getElementById("extra-text");
+
+    document.getElementById("no").addEventListener("click", () => {
+      if (noCount < messages.length) {
+        noButton.textContent = messages[noCount];
+        yesButton.style.transform = `scale(${1 + noCount * 0.2})`;
+
+        noButton.style.position = "absolute";
+        noButton.style.left = `${Math.random() * 200 - 100}px`;
+        noButton.style.top = `${Math.random() * 200 - 100}px`;
+
+        noCount++;
+      }
+    });
+
+    document.getElementById("yes").addEventListener("click", () => {
+      document.getElementById("image").src = "afv.png";
+      document.getElementById("question").textContent = "Yayyy!! I Loveee Youuuuuuuuu Ammuuu❤️";
+      document.getElementById("buttons").style.display = "none";
+      extraText.style.display = "block"; // Display extra text
+      confetti();
+    });
+  </script>
+</body>
+</html>
